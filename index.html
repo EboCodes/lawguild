@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LawGuild Legal Chambers - Your Rights. Our Relentless Pursuit.</title>
+  <meta name="description" content="LawGuild Legal Chambers — Professional legal services with integrity. Book a consultation today." />
+  <meta name="theme-color" content="#C19A6B" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ------------------ Design Tokens (Dark Premium Theme) ------------------ */
+    :root {
+      --clr-primary: #C19A6B;    /* Metallic Gold Accent */
+      --clr-primary-dark: #A4835B; /* Darker Gold */
+      --clr-bg: #0D0D0D;         /* Deep Dark Background */
+      --clr-card-bg: #1A1A1A;    /* Slightly Lighter for Cards/Surfaces */
+      --clr-text: #E0E0E0;       /* Light Grey Body Text */
+      --clr-heading: #FFFFFF;    /* Pure White Headings */
+      --clr-muted: #999999;       /* Subtle Text/Muted */
+      --clr-white: #fff;
+      --clr-black: #000;
+
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+
+      --radius: 16px;
+      --radius-lg: 28px;
+      --radius-pill: 999px;
+
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --shadow-sm: 0 6px 16px rgba(0,0,0,.2);
+
+      --maxw: 1200px;
+      --speed: 500ms;
+      --speed-fast: 250ms;
+
+      /* Modal Specific */
+      --modal-bg: #111;
+      --input-bg: #1a1a1a;
+      --input-border: #444;
+    }
+
+    /* ------------------ Base & Utilities ------------------ */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      color: var(--clr-text);
+      background: var(--clr-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      color: var(--clr-heading);
+    }
+
+    .container {
+      max-width: var(--maxw);
+      margin-inline: auto;
+      padding-inline: clamp(16px, 4vw, 28px);
+    }
+    .muted { color: var(--clr-muted); }
+
+    .grid { display: grid; gap: clamp(14px, 2.4vw, 20px); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 1000px) { .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 700px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+
+    section { padding-block: clamp(50px, 9vw, 100px); }
+
+    /* ------------------ Components ------------------ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .9rem 1.4rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--speed-fast) ease;
+    }
+    .btn-primary {
+      background: var(--clr-primary);
+      color: var(--clr-black); /* Text on gold should be black */
+      box-shadow: var(--shadow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: var(--clr-primary-dark);
+      box-shadow: 0 16px 30px rgba(193,154,107,.4);
+    }
+    .btn-ghost {
+      background: transparent;
+      border-color: var(--clr-primary); /* Gold outline */
+      color: var(--clr-primary);
+    }
+    .btn-ghost:hover {
+      background: rgba(193, 154, 107, 0.1); /* Subtle dark gold hover */
+      color: var(--clr-primary-dark);
+    }
+    .btn-social {
+      justify-content: center;
+      padding: .7rem;
+      background: var(--clr-card-bg);
+      border-color: #333;
+      color: var(--clr-text);
+      border-radius: var(--radius);
+      font-size: 1rem;
+    }
+    .btn-social:hover {
+      border-color: var(--clr-primary);
+      background: #252525;
+      transform: translateY(-2px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-weight: 800;
+      letter-spacing: .2px;
+      color: var(--clr-heading);
+    }
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--clr-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card {
+      background: var(--clr-card-bg);
+      border: 1px solid #333;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--speed-fast) ease, box-shadow var(--speed-fast) ease, border-color var(--speed-fast) ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 36px rgba(0,0,0,.45), 0 0 12px var(--clr-primary); /* Added Gold Glow */
+      border-color: var(--clr-primary);
+    }
+    .card h3 {
+      margin: .2rem 0 .35rem;
+      font-size: 1.2rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: #252525;
+      border: 1px solid #3a3a3a;
+      color: var(--clr-primary);
+      padding: .35rem .7rem;
+      border-radius: var(--radius-pill);
+      font-size: .8rem;
+      font-weight: 700;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: .35rem .7rem;
+      border-radius: var(--radius-pill);
+      background: #252525;
+      color: var(--clr-primary);
+      font-weight: 700;
+      font-size: .8rem;
+    }
+
+    /* ------------------ Sections & Layouts ------------------ */
+    /* Dynamic Header/Nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      transition: background-color var(--speed-fast) ease;
+      background: transparent; /* Default transparent */
+    }
+    .nav.scrolled {
+      background: rgba(13, 13, 13, 0.9); /* Solid dark on scroll */
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid #222;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .8rem 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      padding: .5rem .75rem;
+      border-radius: 10px;
+      color: var(--clr-text);
+      font-weight: 600;
+    }
+    .nav-links a:hover {
+      background: #1A1A1A;
+      color: var(--clr-primary);
+    }
+    .hamburger {
+      display: none;
+      background: transparent;
+      border: 0;
+      font-size: 1.4rem;
+      color: var(--clr-heading);
+    }
+    .hamburger:focus {
+      outline: 2px solid var(--clr-primary);
+      outline-offset: 4px;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 64px 16px auto 16px;
+      background: var(--clr-card-bg);
+      border: 1px solid #333;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 14px;
+      display: none;
+      flex-direction: column;
+      gap: .25rem;
+      z-index: 100;
+    }
+    .mobile-menu a {
+      padding: .9rem 1rem;
+      border-radius: 12px;
+    }
+    .mobile-menu a:hover,
+    .mobile-menu a:focus {
+      background: #222;
+      outline: none;
+    }
+    .mobile-menu.show { display: flex; }
+
+    /* moved inline margin-top from button */
+    .mobile-menu button.btn-primary {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      background:
+        radial-gradient(900px 500px at 80% -10%, rgba(193,154,107,.1), transparent 70%),
+        linear-gradient(180deg, var(--clr-bg), #111);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: clamp(24px, 4vw, 48px);
+      align-items: center;
+      padding-block: clamp(80px, 12vw, 150px);
+    }
+    .headline {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.1;
+      margin: 14px 0 10px;
+      font-weight: 900;
+      letter-spacing: .2px;
+      color: var(--clr-heading);
+    }
+    .sub { color: var(--clr-muted); max-width: 55ch; margin-bottom: 30px; }
+    .hero-card {
+      background: var(--clr-card-bg);
+      border: 1px solid #333;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 3.5vw, 26px);
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+      border-top: 1px dashed #333;
+      padding-top: 24px;
+    }
+    .stat {
+      background: #111;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+    }
+    .stat b { font-size: 1.4rem; color: var(--clr-primary); }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-card { order: -1; }
+    }
+
+    /* About Section - Split Layout */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: clamp(30px, 5vw, 60px);
+      align-items: center;
+    }
+    .about-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      filter: grayscale(100%); /* B&W effect */
+    }
+    @media (max-width: 800px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Section Headings */
+    .section-head { margin-bottom: 36px; }
+    .eyebrow {
+      color: var(--clr-primary);
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .8rem;
+    }
+    .h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      margin: .3rem 0 10px;
+      font-weight: 900;
+    }
+    .lead { color: var(--clr-muted); max-width: 70ch; }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: linear-gradient(120deg, var(--clr-primary), var(--clr-primary-dark));
+      color: var(--clr-black);
+      border-radius: 24px;
+      padding: clamp(22px, 4vw, 36px);
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.2fr auto;
+      align-items: center;
+    }
+    .cta-banner p { opacity: .95; }
+    @media (max-width: 800px) { .cta-banner { grid-template-columns: 1fr; } }
+
+    /* Footer */
+    footer {
+      background: var(--clr-black);
+      color: #e7e7e7;
+      padding-block: 40px;
+    }
+    .fgrid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 30px;
+    }
+    .fcol h4 {
+      margin-top: 0;
+      color: var(--clr-primary);
+    }
+    .fnav a, .fnav span {
+      display: block;
+      padding: .32rem 0;
+      color: #cfd6cf;
+    }
+    .fnav a:hover {
+      color: var(--clr-white);
+    }
+    .copyright {
+      border-top: 1px solid #222;
+      margin-top: 30px;
+      padding-top: 20px;
+      color: #777;
+      font-size: .9rem;
+    }
+    @media (max-width: 900px) { .fgrid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .fgrid { grid-template-columns: 1fr; } }
+
+    /* Floating CTA */
+    .floating-cta {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 100;
+    }
+
+    /* Modal Styling */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity var(--speed-fast) ease;
+}
+
+.modal-backdrop.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--modal-bg);
+  border-radius: var(--radius-lg);
+  padding: clamp(30px, 5vw, 50px);
+  width: min(90vw, 500px);
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+  outline: none;
+  transition: transform var(--speed-fast) ease;
+}
+
+.modal-backdrop.show .modal-content {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: var(--clr-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.modal-close:focus {
+  outline: 2px solid var(--clr-primary);
+  outline-offset: 2px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 95vw;
+    max-height: 90vh;
+    padding: 20px;
+  }
+}
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: .5rem;
+      color: var(--clr-primary);
+      font-weight: 600;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      color: var(--clr-text);
+      border-radius: 8px;
+      transition: border-color var(--speed-fast) ease, box-shadow var(--speed-fast) ease;
+      font-family: var(--font-body);
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--clr-primary);
+      box-shadow: 0 0 0 2px rgba(193, 154, 107, 0.4);
+      outline: none;
+    }
+    .quick-contact-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    /* Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity var(--speed) ease, transform var(--speed) ease;
+    }
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Add horizontal padding to nav elements on mobile */
+    @media (max-width: 900px) {
+      .nav-inner {
+        padding-inline: 1rem;
+      }
+      .brand {
+        padding-left: 0.5rem;
+      }
+      .hamburger {
+        margin-right: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <nav class="nav" id="mainNav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="LawGuild Legal Chambers Home">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3v2m0 0 6 3-6 3-6-3 6-3Zm0 2v13m-6 0h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 8 3 13c0 1.657 2.343 3 3.5 3S10 14.657 10 13L7 8m11 0 3 5c0 1.657-2.343 3-3.5 3S14 14.657 14 13l3-5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>LawGuild Legal Chambers</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#top" aria-current="page">Home</a>
+        <a href="#about-us">About</a>
+        <a href="#practice-areas">Practice Areas</a>
+        <a href="#contact-us" class="btn btn-ghost">Contact</a>
+        </div>
+    </div>
+
+    <div class="mobile-menu container" id="mobileMenu" aria-hidden="true">
+      <a href="#top">Home</a>
+      <a href="#about-us">About</a>
+      <a href="#practice-areas">Practice Areas</a>
+      <a href="#contact-us">Contact</a>
+      <button class="btn btn-primary open-modal">Book Consultation</button>
+    </div>
+  </nav>
+
+  <div class="floating-cta">
+    <button class="btn btn-primary open-modal" aria-label="Book a Consultation" title="Book a Consultation">
+      Book Consultation
+    </button>
+  </div>
+
+  <div class="modal-backdrop" id="consultationModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc" tabindex="-1">
+    <div class="modal-content" tabindex="0">
+      <button class="modal-close" id="closeModal" aria-label="Close form" title="Close form">×</button>
+      <h3 id="modalTitle" style="margin-top:0; color:var(--clr-primary)">Start Your Case Review</h3>
+      <p id="modalDesc" class="muted">Fill out the form and we'll contact you within 24 hours.</p>
+
+      <form action="#" id="consultationForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject/Area of Law</label>
+          <input type="text" id="subject" name="subject" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Briefly describe your matter</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:10px;">Submit Request</button>
+      </form>
+
+      <p class="muted" style="text-align:center; margin-top:30px">Or connect immediately:</p>
+      <div class="quick-contact-links">
+        <a href="https://wa.me/2347048520578" class="btn btn-social" style="flex:1" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+        <a href="tel:+2347048520578" class="btn btn-social" style="flex:1">Call Now</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 class="headline reveal" data-delay="0.1s">Your Rights. Our Relentless Pursuit.</h1>
+        <p class="sub reveal" data-delay="0.2s">
+          At LawGuild Legal Chambers, we provide clear, strategic counsel across Civil, Corporate, Property, Family and Criminal matters. Protecting your interests is our first and final duty.
+        </p>
+        <div class="reveal" data-delay="0.3s" style="display:flex; gap:.8rem; flex-wrap:wrap;">
+          <button class="btn btn-primary open-modal">Book a Consultation</button>
+          <a class="btn btn-ghost" href="#practice-areas">Explore Practice Areas</a>
+        </div>
+
+        <div class="hero-stats reveal" data-delay="0.4s">
+          <div class="stat"><b>4.9/5</b><div class="muted">Client Satisfaction</div></div>
+          <div class="stat"><b>250+</b><div class="muted">Matters Resolved</div></div>
+          <div class="stat"><b>24-48h</b><div class="muted">Response Window</div></div>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <div style="border-radius:20px; overflow:hidden">
+          <img src="b.webp" alt="Classic court building entrance" loading="lazy">
+        </div>
+        <div style="display:grid; gap:12px; margin-top:18px">
+          <div class="pill" aria-hidden="true">General Practice & Advisory</div>
+          <p class="muted" style="margin:0">Private, practical, and proactive counsel for individuals and businesses in Nigeria.</p>
+          <div style="display:flex; gap:.6rem; align-items:center; color:var(--clr-primary)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Confidential Case Review</span>
+          </div>
+          <div style="display:flex; gap:.6rem; align-items:center; color:var(--clr-primary)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Transparent Fixed-Fee Options</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <section id="about-us">
+    <div class="container about-grid">
+      <div class="about-image reveal">
+        <img src="1.webp" alt="Lawyer looking out of window" loading="lazy">
+      </div>
+      <div class="about-copy">
+        <header class="section-head reveal" style="margin-bottom:20px">
+          <div class="eyebrow">Our Mission</div>
+          <h2 class="h2">Integrity in action. Results in focus.</h2>
+        </header>
+        <p class="lead reveal">
+          LawGuild was founded on the principle that every client deserves dedicated, competent, and clear-sighted representation. We cut through the complexity of the law to deliver decisive solutions.
+        </p>
+        <p class="muted reveal">
+          Our chambers combine years of experience in litigation, negotiation, and corporate advisory. We measure our success not just by favorable outcomes, but by the trust and confidence we build with every client.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--clr-card-bg); border-top:1px solid #222;">
+    <div class="container">
+      <header class="section-head reveal">
+        <div class="eyebrow">Our Experts</div>
+        <h2 class="h2">Meet Our Legal Team</h2>
+        <p class="lead">Experienced advocates dedicated to achieving the best possible result for you.</p>
+      </header>
+      <div class="grid grid-3">
+        <article class="card team-card reveal">
+          <img src="3.webp" alt="Portrait of Lead Counsel" loading="lazy">
+          <h3 style="margin-top:15px;">Aisha M. Bello</h3>
+          <p class="chip" style="margin-bottom:10px;">Lead Counsel, Litigation</p>
+          <p class="muted">12+ years experience. Specializes in Civil and Corporate Dispute Resolution.</p>
+        </article>
+        <article class="card team-card reveal" data-delay="0.1s">
+          <img src="2.webp" alt="Portrait of Senior Associate" loading="lazy">
+          <h3 style="margin-top:15px;">Chinedu E. Okafor</h3>
+          <p class="chip" style="margin-bottom:10px;">Senior Associate, Property</p>
+          <p class="muted">Expert in Real Estate Law, Conveyancing, and Title Perfection.</p>
+        </article>
+        <article class="card team-card reveal" data-delay="0.2s">
+          <img src="4.webp" alt="Portrait of Legal Advisor" loading="lazy">
+          <p class="chip" style="margin-bottom:10px;">Legal Advisor, Corporate</p>
+          <p class="muted">Focuses on startup advisory, contracts, and regulatory compliance.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="practice-areas">
+    <div class="container">
+      <header class="section-head reveal">
+        <div class="eyebrow">Practice Areas</div>
+        <h2 class="h2">Clear answers across life & business</h2>
+        <p class="lead">We help clients prevent disputes where possible and resolve them decisively when they arise.</p>
+      </header>
+      <div class="grid grid-3">
+        <article class="card reveal">
+          <span class="chip">Corporate & Commercial</span>
+          <h3>Company Setup & Contracts</h3>
+          <p class="muted">Entity formation, shareholder agreements, NDAs, service contracts, compliance checks.</p>
+          <a class="btn btn-ghost" href="#" style="margin-top:12px">Learn more →</a>
+        </article>
+
+        <article class="card reveal">
+          <span class="chip">Property & Real Estate</span>
+          <h3>Title Search & Conveyancing</h3>
+          <p class="muted">Due diligence, purchase/sale agreements, tenancy issues, perfected titles & filings.</p>
+          <a class="btn btn-ghost" href="#" style="margin-top:12px">Learn more →</a>
+        </article>
+
+        <article class="card reveal">
+          <span class="chip">Family Law</span>
+          <h3>Marriage, Custody & Support</h3>
+          <p class="muted">Prenups, separation, custody, maintenance, and alternative dispute resolution options.</p>
+          <a class="btn btn-ghost" href="#" style="margin-top:12px">Learn more →</a>
+        </article>
+
+        <article class="card reveal">
+          <span class="chip">Criminal Defence</span>
+          <h3>Rights Protection</h3>
+          <p class="muted">Bail applications, representation, fundamental rights enforcement, strategic defence.</p>
+          <a class="btn btn-ghost" href="#" style="margin-top:12px">Learn more →</a>
+        </article>
+
+        <article class="card reveal">
+          <span class="chip">Civil Litigation</span>
+          <h3>Dispute Resolution</h3>
+          <p class="muted">Debt recovery, breach of contract, tort claims, pre-action advice and settlement.</p>
+          <a class="btn btn-ghost" href="#" style="margin-top:12px">Learn more →</a>
+        </article>
+
+        <article class="card reveal">
+          <span class="chip">Advisory</span>
+          <h3>Compliance & Risk</h3>
+          <p class="muted">Policies, regulatory filings, risk reviews, staff training, and compliance frameworks.</p>
+          <a class="btn btn-ghost" href="#" style="margin-top:12px">Learn more →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#111; border-top:1px solid #222; border-bottom:1px solid #222">
+    <div class="container">
+      <header class="section-head reveal">
+        <div class="eyebrow">Our Edge</div>
+        <h2 class="h2">Professional. Practical. Proactive.</h2>
+      </header>
+      <div class="grid grid-3">
+        <div class="card reveal">
+          <h3>Strategic Counsel</h3>
+          <p class="muted">We don't just react; we design legal strategies that align with your ultimate business or personal goals.</p>
+        </div>
+        <div class="card reveal">
+          <h3>Unwavering Discretion</h3>
+          <p class="muted">Your matter is handled with the highest level of confidentiality and professional integrity at all times.</p>
+        </div>
+        <div class="card reveal">
+          <h3>Global Perspective</h3>
+          <p class="muted">Leveraging international best practices while maintaining deep expertise in Nigerian law and jurisdiction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <header class="section-head reveal">
+        <div class="eyebrow">Testimonials</div>
+        <h2 class="h2">What clients say</h2>
+      </header>
+      <div class="grid grid-3">
+        <figure class="card reveal">
+          <blockquote style="color:var(--clr-text)">“Professional, responsive, and results-driven. Our contract dispute was resolved swiftly and without court intervention.”</blockquote>
+          <figcaption class="muted">K. Adeyemi, SME Owner</figcaption>
+        </figure>
+        <figure class="card reveal">
+          <blockquote style="color:var(--clr-text)">“Handled a complex property transaction end-to-end. The due diligence saved us from significant financial risk.”</blockquote>
+          <figcaption class="muted">O. Nwosu, Real Estate Investor</figcaption>
+        </figure>
+        <figure class="card reveal">
+          <blockquote style="color:var(--clr-text)">“Clear guidance during a stressful family matter. We felt supported and confident throughout the entire process.”</blockquote>
+          <figcaption class="muted">B. Hassan, Private Client</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" id="contact-us">
+    <div class="cta-banner reveal">
+      <div>
+        <h3 style="margin:.2rem 0 .4rem; font-size:clamp(24px,3vw,34px); color:var(--clr-black)">Ready to discuss your case?</h3>
+        <p style="color:var(--clr-black)">Book a quick assessment. We’ll review your matter and outline next steps and fees.</p>
+      </div>
+      <div style="display:flex; gap:.6rem; justify-content:flex-end; flex-wrap:wrap">
+        <button class="btn btn-primary open-modal">Book Consultation</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="fgrid">
+        <div class="fcol">
+          <a href="#top" class="brand" style="margin-bottom:10px">
+            <span class="brand-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 3v2m0 0 6 3-6 3-6-3 6-3Zm0 2v13m-6 0h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 8 3 13c0 1.657 2.343 3 3.5 3S10 14.657 10 13L7 8m11 0 3 5c0 1.657-2.343 3-3.5 3S14 14.657 14 13l3-5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <strong>LawGuild Legal Chambers</strong>
+          </a>
+          <p class="muted" style="max-width:60ch">Strategic, professional counsel with a client-first approach in Corporate, Civil, Property, and Family law.</p>
+        </div>
+        <div class="fcol">
+          <h4>Firm</h4>
+          <nav class="fnav">
+            <a href="#about-us">About Us</a>
+            <a href="#practice-areas">Practice Areas</a>
+            <a href="#">Careers</a>
+            <a href="#l">Privacy Policy</a>
+          </nav>
+        </div>
+        <div class="fcol">
+          <h4>Contact</h4>
+          <nav class="fnav">
+            <a href="tel:+2347048520578">+2347048520578</a>
+            <a href="mailto:ebocodes675@gmail.com">ebocodes675@gmail.com</a>
+            <span class="muted">Mon-Fri, 9am-5pm WAT</span>
+          </nav>
+        </div>
+      </div>
+      <div class="copyright">
+        <p style="margin-bottom:5px; color:#555">Registered under Nigerian Corporate Affairs Commission (RC XXXXXX). All Rights Reserved.</p>
+        © <span id="year"></span> LawGuild Legal Chambers.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ------------------- JAVASCRIPT LOGIC -------------------
+
+    // 1. Mobile Menu Toggle
+    const burger = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    if (burger && menu) {
+      burger.addEventListener('click', () => {
+        const isExpanded = burger.getAttribute('aria-expanded') === 'true' || false;
+        burger.setAttribute('aria-expanded', (!isExpanded).toString());
+        menu.classList.toggle('show');
+        menu.setAttribute('aria-hidden', isExpanded.toString());
+        // Manage focus for accessibility: focus first link when shown
+        if (!isExpanded) {
+          const firstLink = menu.querySelector('a, button');
+          if (firstLink) firstLink.focus();
+        }
+      });
+    }
+
+    // 2. Dynamic Header on Scroll
+    const nav = document.getElementById('mainNav');
+    if (nav) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      });
+    }
+
+    // 3. Floating CTA and Modal Logic with Focus Trap on Modal
+    const modal = document.getElementById('consultationModal');
+    const openButtons = document.querySelectorAll('.open-modal');
+    const closeButton = document.getElementById('closeModal');
+    const firstFocusableSelector =
+      'a[href], button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="email"]:not([disabled]), input[type="password"]:not([disabled]), select:not([disabled])';
+
+    function trapFocus(element) {
+      const focusableElements = element.querySelectorAll(firstFocusableSelector);
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+
+      element.addEventListener('keydown', function(e) {
+        const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+
+        if (!isTabPressed) return;
+
+        if (e.shiftKey) { // shift + tab
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+        } else { // tab
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
+        }
+      });
+    }
+
+    if (modal) {
+      openButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          modal.classList.add('show');
+          // Set focus inside modal
+          const modalContent = modal.querySelector('.modal-content');
+          if (modalContent) {
+            modalContent.focus();
+            trapFocus(modalContent);
+          }
+        });
+      });
+
+      if (closeButton) {
+        closeButton.addEventListener('click', () => {
+          modal.classList.remove('show');
+          // Return focus to the first open button
+          if (openButtons.length > 0) openButtons[0].focus();
+        });
+      }
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('show');
+          if (openButtons.length > 0) openButtons[0].focus();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+          modal.classList.remove('show');
+          if (openButtons.length > 0) openButtons[0].focus();
+        }
+      });
+    }
+
+    // 4. Scroll Reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || '0s';
+            entry.target.style.transitionDelay = delay;
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 5. Update Footer Year
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // 6. Form Submission integrated with Google Apps Script web app
+    const form = document.getElementById('consultationForm');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const data = {
+          name: form.name.value,
+          email: form.email.value,
+          subject: form.subject.value,
+          message: form.message.value,
+        };
+
+        fetch('https://script.google.com/macros/s/AKfycbyxamV4HD-KyDbnG4EpczT4AVYAjTCUrh14Fn3cP9hbanCoQCkf0AyizUiA0k1uHvPD/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }).then(() => {
+          alert('Form submitted successfully!');
+          form.reset();
+          modal.classList.remove('show'); // Close modal on submission
+          if (openButtons.length > 0) openButtons[0].focus();
+        }).catch(() => {
+          alert('Failed to submit form.');
+        });
+      });
+    }
+  </script>
+</body>
+</html>
